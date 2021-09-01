@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
 
 export default function GenComment(): JSX.Element {
-  type T_Comment = {
-    id: string;
-    content: string;
-    replies: T_Comment[];
-  };
 
   let initialCommentTree: T_Comment[] = [
+    // sample comment
     {
       id: "0",
       content: "Please share your opinion on my new car?",
@@ -34,7 +29,7 @@ export default function GenComment(): JSX.Element {
   const [replyContent, setReplyContent] = useState("");
 
   useEffect(() => {
-    // add a comment box in the dom
+    // updates the commentTree whenever a new comment is added.
     setCommentTree(commentTree);
   }, [commentTree]);
 
@@ -46,8 +41,8 @@ export default function GenComment(): JSX.Element {
   };
 
   const genId = (parent_id: string, reply: T_Comment): string => {
-    let new_id = "";
-    // check length of replies
+    // generates a new id based on the replies' array length
+    let new_id : string = "";
     let length: number = reply.replies.length;
     if (length === 0) {
       new_id = parent_id + "-" + 0;
@@ -58,6 +53,7 @@ export default function GenComment(): JSX.Element {
   };
 
   const dfs = (obj: T_Comment, targetId: string): T_Comment | undefined => {
+    // depth-first-search to find the target object
     if (obj.id === targetId) {
       return obj;
     }
@@ -72,6 +68,7 @@ export default function GenComment(): JSX.Element {
   };
 
   const submitReply = (parent_id: string): void => {
+    // submits the new reply to replies array index 
     let result: T_Comment | any = {};
 
     for (let obj of commentTree) {
@@ -89,8 +86,11 @@ export default function GenComment(): JSX.Element {
       replies: []
     };
 
+    // push the new object to the result index
     result.replies.push(newObj);
+    // resets the reply status back to false which hides the reply box.
     setReplyStatus({ id: "0", status: false });
+    // resets the reply box's content
     setReplyContent("");
   };
 

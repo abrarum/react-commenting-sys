@@ -1,7 +1,6 @@
-
 body {
   margin: 0;
-  font-family: 'Besley', serif;
+  background-color: #e2e2e2;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
