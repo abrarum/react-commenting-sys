@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./App.css";
 import GenComment from "./components/GenComment";
 
 export default function App() {
