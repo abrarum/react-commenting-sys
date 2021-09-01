@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-
+import Paper from '@material-ui/core/Paper';
 
 export default function GenComment(): JSX.Element {
   type T_Comment = {
@@ -118,7 +118,7 @@ export default function GenComment(): JSX.Element {
           <Button
           variant="contained" color="primary"
             onClick={() => {
-              submitReply(comment.id);
+              replyContent.length !== 0 ? submitReply(comment.id) : setReplyStatus({ id: "0", status: false });
             }}
           >
             submit
