@@ -26,9 +26,8 @@
   margin-top: 10px;
 }
 
-.reply-box textarea {
-  display: flex;
-  width: 90%;
+.reply-box form {
+  width: 100%
 }
 
 .reply-box button {

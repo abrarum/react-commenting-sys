@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { Button } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+
 
 export default function GenComment(): JSX.Element {
   type T_Comment = {
@@ -95,22 +98,31 @@ export default function GenComment(): JSX.Element {
     <div key={comment.id} className="comment">
       <div className="content">
         <div>{comment.content}</div>
-        <button onClick={() => addReply(comment.id)}>Reply</button>
+        <Button variant="contained" color="primary" onClick={() => addReply(comment.id)}>Reply</Button>
       </div>
       {replyStatus.status === true && replyStatus.id === comment.id ? (
         <div className="reply-box">
-          <textarea
-            autoFocus
-            value={replyContent}
-            onChange={(e) => setReplyContent(e.target.value)}
-          />{" "}
-          <button
+          <form>
+            <TextField
+              fullWidth
+              className="textarea"
+              autoFocus
+              label="Add a comment"
+              multiline
+              rows={4}
+              variant="outlined"
+              value={replyContent}
+              onChange={(e) => setReplyContent(e.target.value)}
+            />{" "}
+          </form>
+          <Button
+          variant="contained" color="primary"
             onClick={() => {
               submitReply(comment.id);
             }}
           >
             submit
-          </button>
+          </Button>
         </div>
       ) : (
         <></>
